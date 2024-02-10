@@ -41,5 +41,18 @@ private PostService postService;
             return postDtos;
         }
 
+        //http://localhost:8080/api/posts/2
+        @DeleteMapping("/{id}")
+    public ResponseEntity<String> deletePostById(@PathVariable long id){
+        postService.deletePostById(id);
+        return new ResponseEntity<>("The post is Deleted!", HttpStatus.OK);
+        }
+
+        //http://localhost:8080/api/posts/update/1
+@PutMapping("/update/{id}")
+public ResponseEntity<PostDto> updatePostById(@PathVariable long id, @RequestBody PostDto postDto){
+    PostDto updatedDto = postService.updatePostById(id,postDto);
+    return new ResponseEntity<>(updatedDto, HttpStatus.OK);
+}
 
 }

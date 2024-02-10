@@ -69,4 +69,22 @@ private ModelMapper modelMapper;
     }
 
 
+    @Override
+    public void deletePostById(long id) {
+        postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not found with id: " + id));
+        postRepository.deleteById(id);
+
+    }
+
+    @Override
+    public PostDto updatePostById(long id, PostDto postDto) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new RuntimeException("Post not not found with id: " + id));
+        modelMapper.map(postDto,post);
+        post.setId(id);
+        Post savedPost = postRepository.save(post);
+        PostDto dto = mapToDto(savedPost);
+        return dto;
+    }
+
+
 }

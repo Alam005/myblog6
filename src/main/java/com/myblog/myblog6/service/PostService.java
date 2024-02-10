@@ -15,4 +15,8 @@ public interface PostService {
    PostDto mapToDto(Post post);
 
     List<PostDto> getAllPost(int pageNo, int pageSize, String sortBy, String sortDir);
+
+    void deletePostById(long id);
+
+    PostDto updatePostById(long id, PostDto postDto);
 }

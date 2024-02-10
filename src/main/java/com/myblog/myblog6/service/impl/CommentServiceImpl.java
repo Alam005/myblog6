@@ -26,6 +26,8 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     public void deleteCommentById(long id) {
+        commentRepository.findById(id).orElseThrow(()->new RuntimeException("Comment not found with id: "+id)); //Returns comments from repository layer if present.
+        //if not found the next line of code will not be executed further.
         commentRepository.deleteById(id);
     }
 
