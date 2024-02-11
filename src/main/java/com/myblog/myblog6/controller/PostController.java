@@ -5,6 +5,7 @@ import com.myblog.myblog6.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,6 +19,8 @@ private PostService postService;
         this.postService = postService;
     }
 
+ //http://localhost:8080/api/posts/dto
+    @PreAuthorize("hasRole('ADMIN')") //only an admin can create a post
     @PostMapping("/dto")
     public ResponseEntity<PostDto> createPost(@RequestBody PostDto postDto){
         PostDto dto = postService.createPost(postDto);
